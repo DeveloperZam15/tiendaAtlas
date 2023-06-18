@@ -140,3 +140,10 @@ Se actualiza el script a
 
 Para conectarse al proyecto compilado 
 node proyecto/index.js
+
+MODULO DE DESARROLLO "dev": "nodemon src/index.js --exec babel-node",
+MODULO DE COMPILACION "build": "babel src -d proyecto && ncp src/views proyecto/views && ncp src/frontend proyecto/frontend"
+MODULO DE PRODUCCION     "start": "node proyecto/index.js"
+
+Se descarga otro modulo para iniciar el moduo de produccion
+npm i @babel/runtime
