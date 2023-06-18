@@ -1,0 +1,6 @@
+//Nos ayuda configurar a babel para indicar que queremos taducir de nuestro codigo 
+{
+    "presets": [
+        "@babel/preset-env"
+    ]
+}

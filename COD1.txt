@@ -1,0 +1,122 @@
+CONEXION Y FORMULARIO A MONGO DB
+
+NODE JS
+JAVA SCRIPT 
+MONGODB
+
+SISTEMA WEB
+
+CREACIÓN DE PACKAGE JASON
+npm init -y 
+#Donde se van listando nuestro modulos que vamos utilizando o se necesitan para este proyecto
+
+INSTALACIÓN DE MODULOS
+npm i express express-handlebars mongoose morgan cors 
+
+express: framework de node para crear un servidor
+express-handlebars: Para integrar un motor de plantilla que nos permite ocupar funciones, funciona desde el servidor
+mongoose: nos ayuda a modelar los datos en mongodb y a conectarnos
+morgan: ver peticiones desde consola 
+cors
+
+INSTALACIÓN DE BABEL COMO MODULO DE DEPENDECIA DE DESARROLLO 
+npm i -D @babel/core @babel/cli @babel/node @babel/preset-env nodemon 
+
+core:compilador de babel
+cli:babel desde consola
+node:para indicar que es un proyecto de node
+preset:permite traducir diferentes entornos
+nodemon:dependencia de desarrollo para ver los cambios desde consola y reinicio cuando hay cambios 
+
+EJECUCION DE NUESTRO SERVIDOR
+npx babel-node src/index.js
+Ejecuta el paquete ubicado en src llamado index por medio de babel para adecuarlo o traducirlo al entorno actual
+
+
+Se aplica en scripts de package.json
+"dev": "nodemon src/index.js --exec babel-node"
+para ejecutar npm run dev y ver los cambios desde consola y hacer funcionar el servidor ya traducido
+
+carpeta MODELS
+sirve para guardar los modelos y acciones que se hacen para la BD
+
+carpeta VIEWS
+sirve para crear las vistas de las interfacez
+
+y un archivo de CONFIGURACION para la BD
+database.js  
+
+TODO LO ANTERIOR EN SRC
+
+Configurar EXPRESS y el PATH PARA QUE LO RECONOZCA HANDLEBARS en app.js
+import { ExpressHandlebars } from "express-handlebars";
+import path from "path"; // modulo de node
+Sirve para que se reconozcan las rutas de nuestros directorios y se adapte
+
+Version anterior de handlebars 
+npm i express-handlebars@5.3.4
+
+
+views > layouts > main.hbs
+Acá es donde se conserva una parte y solo cambia el body
+
+En el main se hacen los enlaces a las diferentes views
+indexroutes.js guarda las rutas hacia los archivo views .hbs
+
+views > partials > navbar.hbs 
+Sirve para tener nuestra barra de navegación acomodad en otra parte, debemos importar en el main.hbs 
+
+En database.js hacemos la conexion a mongo local y la importamos en index.js
+Despues modelamos nuestros datos en models con .js por ejemplo el Productos.js
+en el que pondremos los datos y las especificaciones de extas asi como su exportacion
+
+En indexroutes tenemos las acciones para guardas actualizar y demás, es donde utilizamos
+la ruta definida en los models para obtener los datos y mandarlos a la base de dats se´gun 
+la estructura que planteamos
+
+db.productos.find().pretty()
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+Lista GENERAL, actualizar y eliminar
+
+router.get("/", async (req, res) => {
+  const productos = await Productos.find().lean();
+  //Propiedad lean para crear objetos comunes de java script 
+  //console.log(productos);
+  res.render("index", {productos:productos});
+  //para mostrar la lista desde index.hbs
+});
+
+INDEXROUTES.JS
+
+VIEWS > PARTIALS > productoForm.hbs y productoTabla.hbs 
+Se tiene uno para recoger los datos y otro para listarlos
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+STATUS
+
+Se crea el controller para tener mas orden en el indexroutes
+
+controllers > productoControllers
+van las rutas de acceso, exportamos e importamos en el indexroutes.js de la carpeta routes
+
+Si modificamos las rutas en indexroutes, tambien debemos modificcarlas en la tabla y en la de editar
+
+Utilizamos bootstrap para darle diseño
+
+configuracion de la carpeta frontend para que sea pubilica en el app.js
+SRC > frontend > css > main.css o icons >
+//archivos estaticos para guardad estilos o images, etc.
+app.use(express.static(path.join(__dirname, "frontend")));
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+VARIABLE DE ENTORNO Y DESPLIEGUE
+
+Vamos a instalar un modulo más para hacer lo de las variables
+npm i dotenv
+
+y se crea en la raiz el archivo .env para las variables
+tambien se crea el archivo config.js donde importamos en dotenv
