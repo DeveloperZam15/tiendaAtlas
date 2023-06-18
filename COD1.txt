@@ -120,3 +120,23 @@ npm i dotenv
 
 y se crea en la raiz el archivo .env para las variables
 tambien se crea el archivo config.js donde importamos en dotenv
+
+creamos en package.json un cript nuevo
+"build": "babel src -d proyecto" 
+Va a crear un nuevo directorio llamado proyecto con babel
+Todo lo que esta en src lo va a pasar a proyecto
+
+luego instalamos este
+npm install --save-dev @babel/plugin-transform-runtime
+para que se tranforme nuestro codigo 
+
+npm run build para que se cree la carpeta con la traduccion a java script
+No se obtiene todo lo necesario por lo que vamos a copiar lo faltante con
+
+Se intala un nuevo modulo 
+npm i ncp -D
+Se actualiza el script a
+"build": "babel src -d proyecto && ncp src/views proyecto/views && ncp src/frontend proyecto/frontend"
+
+Para conectarse al proyecto compilado 
+node proyecto/index.js

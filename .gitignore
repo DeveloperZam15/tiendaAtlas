@@ -1,2 +1,4 @@
+#Dependencias de NODE Y CARPETA CONSTRUIDA Y VARIABLES DE ENTORNO
 node_modules
-node_modules
+proyecto
+.env
