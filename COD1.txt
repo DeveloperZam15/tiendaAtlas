@@ -147,3 +147,6 @@ MODULO DE PRODUCCION     "start": "node proyecto/index.js"
 
 Se descarga otro modulo para iniciar el moduo de produccion
 npm i @babel/runtime
+
+//ATLAS
+mongodb+srv://danielzam:12345@tiendanube.ud1wikz.mongodb.net/?retryWrites=true&w=majority
